@@ -3,18 +3,19 @@ const mongoose = require("mongoose");
 const blogSchema = new mongoose.Schema({
     title:{
         type:String,
-        required:[true, "please enter Title"]
     },
-    published : {
+    publishedDate : {
+        type:String,
+    },
+    publishedTime : {
         type:String,
     },
     contents:{
         type:Array,
-        default:[]
+        default:[],
     },
     readTime:{
         type:Number,
-        required:[true, "please enter Read Time"]
     },  
     conclusion:{
         type:String,
