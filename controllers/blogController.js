@@ -1,7 +1,4 @@
-const User = require("../models/user")
 const Blog = require("../models/blogModel")
-
-
 
 exports.createBlog = async (req,res,next)=>{
     const blog = await Blog.create(req.body);
@@ -49,3 +46,30 @@ exports.deleteBlog = async (req, res)=>{
     })
   }
 }
+exports.updateBlog = async (req, res)=>{
+  const id = req.params.id;
+  const updatedBlog = req.body;
+  try{
+    const blog = await Blog.findByIdAndUpdate(id,updatedBlog,{
+      new : true,
+      runValidators:true,
+    })
+    if(!blog){
+      return res.status(404).json({
+        success:false,
+        message:"Blog not foundd",
+      })
+    }
+    res.status(200).json({
+      message: "Blogg edited successfully",
+      success: true,
+      blog,
+    });
+  }catch(error){
+    res.status(400).json({
+      success:false,
+      message: "Failed to update the blog",
+      error: error.message,
+    });
+  }
+};

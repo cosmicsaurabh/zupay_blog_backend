@@ -4,6 +4,9 @@ const blogSchema = new mongoose.Schema({
     title:{
         type:String,
     },
+    creatorId:{
+        type:String,
+    },
     publishedDate : {
         type:String,
     },
